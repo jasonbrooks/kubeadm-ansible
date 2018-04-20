@@ -13,7 +13,7 @@
     filename: 'docker'
 
 - name: Add Docker yum repository
-  when: ansible_os_family == "RedHat"
+  when: ansible_os_family == "RedHat" and not distro_docker
   yum_repository:
     name: Docker
     description: Docker Repository
@@ -24,9 +24,15 @@
     gpgkey: https://yum.dockerproject.org/gpg
 
 - name: Install docker engine (RHEL/CentOS)
-  when: ansible_os_family == "RedHat"
+  when: ansible_os_family == "RedHat" and not distro_docker
   yum:
     name: "docker-engine-{{ docker_version }}.*"
+    state: present
+
+- name: Install docker from distro (RHEL/CentOS)
+  when: ansible_os_family == "RedHat" and distro_docker
+  yum:
+    name: "docker"
     state: present
 
 - name: Install docker engine (Debian/Ubuntu)

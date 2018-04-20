@@ -1,5 +1,14 @@
 ---
 
+- name: Create dirs for SELinux
+  file:
+    path: "{{ item }}"
+    state: directory
+    setype: svirt_sandbox_file_t
+  with_items:
+    - /etc/cni/net.d
+  when: distro_docker
+
 - name: Reset Kubernetes component
   shell: "kubeadm reset"
   register: reset_cluster

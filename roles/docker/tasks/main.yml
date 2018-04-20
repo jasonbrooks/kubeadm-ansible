@@ -11,9 +11,11 @@
     owner: root
     group: root
     mode: 0755
+  when: not distro_docker
 
 - name: Copy Docker environment config file
   template: src=docker.j2 dest={{ system_env_dir }}/docker
+  when: not distro_docker
 
 - name: Add any insecure registrys to Docker config
   when: insecure_registrys is defined and insecure_registrys > 0
