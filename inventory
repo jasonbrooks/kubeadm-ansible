@@ -1,8 +1,8 @@
 [master]
-192.16.35.12
+centos-1.osas.lab
 
 [node]
-192.16.35.[10:11]
+centos-[2:3].osas.lab
 
 [kube-cluster:children]
 master
@@ -10,8 +10,10 @@ node
 
 [all:vars]
 
+ansible_ssh_user=root
+
 # Kubernetes
-kube_version=v1.9.3
+kube_version=v1.10.1
 token=b0f7b8.8d1767876297d85c
 
 # 1.8.x feature=--feature-gates SelfHosting=true
@@ -43,4 +45,7 @@ kubeadmin_config=/etc/kubernetes/admin.conf
 kube_addon_dir=/etc/kubernetes/addon
 
 # use docker from distro
-distro_docker=false
+distro_docker=true
+
+# use kube from distro
+distro_kube=true

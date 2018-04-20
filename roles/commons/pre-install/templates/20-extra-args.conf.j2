@@ -1,2 +1,2 @@
 [Service]
-Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"
+Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --cgroup-driver=systemd"

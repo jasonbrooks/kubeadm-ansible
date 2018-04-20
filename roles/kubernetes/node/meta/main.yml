@@ -1,4 +1,5 @@
 ---
 dependencies:
   - { role: commons/os-checker }
-  - { role: commons/pre-install , pkgs: [ "kubelet", "kubernetes-cni", "kubeadm" ] }
+  - { role: commons/pre-install, pkgs: [ "kubelet", "kubernetes-cni", "kubeadm" ], when: not distro_kube }
+  - { role: commons/pre-install, pkgs: [ "kubernetes-kubeadm", "ethtool" ], when: distro_kube }
